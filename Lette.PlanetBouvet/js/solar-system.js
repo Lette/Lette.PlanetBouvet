@@ -170,15 +170,15 @@ var cameraTarget = 'sun';
 
 var onKeypress = function(e) {
     var keyCode = e.keyCode;
-    if (keyCode == 115) { // 's'
+    if (keyCode === 115) { // 's'
         cameraTarget = 'sun';
-    } else if (keyCode == 101) { // 'e'
+    } else if (keyCode === 101) { // 'e'
         cameraTarget = 'earth';
-    } else if (keyCode == 109) { // 'm'
+    } else if (keyCode === 109) { // 'm'
         cameraTarget = 'moon';
-    } else if (keyCode == 69) { // 'E'
+    } else if (keyCode === 69) { // 'E'
         cameraTarget = 'earthFromSun';
-    } else if (keyCode == 77) { // 'M'
+    } else if (keyCode === 77) { // 'M'
         cameraTarget = 'moonFromEarth';
     }
 };
@@ -188,16 +188,16 @@ window.addEventListener('keypress', onKeypress, false);
 var navigationMode = '';
 
 var onKeydown = function (e) {
-    if (e.keyCode == 37) {
+    if (e.keyCode === 37) {
         navigationMode = 'left';
-    } else if (e.keyCode == 39) {
+    } else if (e.keyCode === 39) {
         navigationMode = 'right';
     }
     //console.log(e.keyCode);
 };
 
 var onKeyup = function(e) {
-    if (e.keyCode == 37 || e.keyCode == 39) {
+    if (e.keyCode === 37 || e.keyCode === 39) {
         navigationMode = 'stop';
     }
 };
@@ -214,23 +214,24 @@ var navigationSpeedFactor = 0.0;
 var navigationStart = 0.0;
 
 function adjustCameraAngle(elapsed) {
-    if (navigationMode == 'left') {
-        if (navigationStart == 0.0) {
-            navigationStart = elapsed;
-        }
-        if (elapsed - navigationStart >= 1.0) {
-            navigationSpeedFactor = 1.0;
-        } else {
+    // TODO: Keyboard panning with smooth transitions
+    //if (navigationMode == 'left') {
+    //    if (navigationStart == 0.0) {
+    //        navigationStart = elapsed;
+    //    }
+    //    if (elapsed - navigationStart >= 1.0) {
+    //        navigationSpeedFactor = 1.0;
+    //    } else {
             
-        }
+    //    }
 
-        cameraAngle -= navigationSpeed * navigationSpeedFactor * elapsed;
-    } else if (navigationMode == 'right') {
-        cameraAngle += navigationSpeed * elapsed;
-    } else {
-        navigationSpeedFactor
-        cameraAngle += cameraRotationAngularSpeed * elapsed;
-    }
+    //    cameraAngle -= navigationSpeed * navigationSpeedFactor * elapsed;
+    //} else if (navigationMode == 'right') {
+    //    cameraAngle += navigationSpeed * elapsed;
+    //} else {
+    //    navigationSpeedFactor
+    //    cameraAngle += cameraRotationAngularSpeed * elapsed;
+    //}
 }
 
 function render() {
@@ -255,7 +256,7 @@ function render() {
 
     adjustCameraAngle(elapsed);
     
-    if (cameraTarget == 'sun') {
+    if (cameraTarget === 'sun') {
 
         /* CAMERA ROTATING AROUND SUN */
 
@@ -266,11 +267,11 @@ function render() {
 
         camera.lookAt(origin);
 
-    } else if (cameraTarget == 'earth' || cameraTarget == 'moon') {
+    } else if (cameraTarget === 'earth' || cameraTarget === 'moon') {
 
         /* CAMERA ROTATING AROUND EARTH OR MOON */
 
-        if (cameraTarget == 'earth') {
+        if (cameraTarget === 'earth') {
             targetPosition = earth.getWorldPosition();
         } else {
             targetPosition = moon.getWorldPosition();
@@ -283,7 +284,7 @@ function render() {
 
         camera.lookAt(targetPosition);
 
-    } else if (cameraTarget == 'moonFromEarth') {
+    } else if (cameraTarget === 'moonFromEarth') {
 
         /* CAMERA LOOKING AT THE MOON FROM EARTH */
 
