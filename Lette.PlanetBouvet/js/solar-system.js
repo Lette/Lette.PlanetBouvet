@@ -215,23 +215,23 @@ var navigationStart = 0.0;
 
 function adjustCameraAngle(elapsed) {
     // TODO: Keyboard panning with smooth transitions
-    //if (navigationMode == 'left') {
-    //    if (navigationStart == 0.0) {
-    //        navigationStart = elapsed;
-    //    }
-    //    if (elapsed - navigationStart >= 1.0) {
-    //        navigationSpeedFactor = 1.0;
-    //    } else {
+    if (navigationMode == 'left') {
+        if (navigationStart == 0.0) {
+            navigationStart = elapsed;
+        }
+        if (elapsed - navigationStart >= 1.0) {
+            navigationSpeedFactor = 1.0;
+        } else {
             
-    //    }
+        }
 
-    //    cameraAngle -= navigationSpeed * navigationSpeedFactor * elapsed;
-    //} else if (navigationMode == 'right') {
-    //    cameraAngle += navigationSpeed * elapsed;
-    //} else {
+        cameraAngle -= navigationSpeed * navigationSpeedFactor * elapsed;
+    } else if (navigationMode == 'right') {
+        cameraAngle += navigationSpeed * elapsed;
+    } else {
     //    navigationSpeedFactor
-    //    cameraAngle += cameraRotationAngularSpeed * elapsed;
-    //}
+        cameraAngle += cameraRotationAngularSpeed * elapsed;
+    }
 }
 
 function render() {
